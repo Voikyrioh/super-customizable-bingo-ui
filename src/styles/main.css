@@ -1,0 +1,35 @@
+@import 'tailwindcss';
+
+/*noinspection ALL*/
+@font-face {
+    font-family: SourGummy;
+    src: url('/fonts/SourGummy.ttf');
+}
+
+@theme {
+    --color-paper: #f8f5f5;
+    --color-ink: #191925;
+}
+
+body, html, :root {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: SourGummy, sans-serif;
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+}
+
+/*
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #101010;
+        color: #dedede;
+    }
+}
+*/
