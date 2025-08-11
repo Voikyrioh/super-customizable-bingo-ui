@@ -41,7 +41,7 @@ function sendMessage() {
 <template>
   <div class="w-full h-full flex flex-col">
     <h3 class="w-full text-center p-4 text-3xl font-bold">Chat</h3>
-    <hr class="w-full border-2 border-solid border-gray-300"></hr>
+    <hr class="w-full border-2 border-solid border-gray-300">
     <div class="w-full h-full pt-2 pb-2 overflow-y-scroll overflow-x-clip">
       <div v-for="message of messages" class="w-full p-4 pt-1 pb-1">
         <span class="font-light text-sm"> {{ message.at.getHours() }}:{{ message.at.getMinutes() }}&nbsp;</span>

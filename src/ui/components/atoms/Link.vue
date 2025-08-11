@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <img src="/send.svg" alt="send-icon">
+  <a class="text-blue-500 hover:text-blue-400 hover:cursor-pointer"><slot/></a>
 </template>
 
 <style scoped>

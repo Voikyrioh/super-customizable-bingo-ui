@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <img src="/send.svg" alt="send-icon">
+
 </template>
 
 <style scoped>
