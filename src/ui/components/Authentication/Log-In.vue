@@ -2,16 +2,18 @@
 import { ref } from "vue";
   import type { Login } from "./type.ts";
 import Link from "../atoms/Link.vue";
+import { login } from "./authentication.service.ts";
 
-  const emit = defineEmits<{ 'goto-signup': [] }>()
+  const emit = defineEmits<{ 'goto-signup': [], 'logged-in': [string] }>()
   const loginForm = ref<Login>({password: '', username: ''})
   const inputError = ref<{ username?: string, password?: string }>({})
   const loginError = ref<string|null>()
 
-  function login(event: SubmitEvent) {
+  function loginEvent(event: SubmitEvent) {
     event.preventDefault()
     event.stopPropagation()
-    console.log(loginForm.value)
+
+    login(loginForm.value).then((resp) => { emit('logged-in', resp)})
   }
 </script>
 
@@ -23,7 +25,7 @@ import Link from "../atoms/Link.vue";
         class="w-4/5 ml-auto mr-auto mt-8 ring-0 ring-offset-red-500  bg-red-200 text-center text-red-600 rounded-sm transition-all"
         :class="{ 'ring-2': loginError, 'h-0': !loginError }"
     >{{ loginError }}</div>
-    <form class="flex flex-col w-full p-8 mb-16" v-on:submit="(event) => login(event as SubmitEvent)">
+    <form class="flex flex-col w-full p-8 mb-16" v-on:submit="(event) => loginEvent(event as SubmitEvent)">
       <label for="username">Account id <b class="text-red-500">*</b></label>
       <input type="text" v-model="loginForm.username" id="account" placeholder="Your account id" class="p-2 w-full h-10 border-solid border-2 rounded-lg mb-4" required
         :class="{ 'border-red': inputError.username, 'h-0': !inputError.username }">

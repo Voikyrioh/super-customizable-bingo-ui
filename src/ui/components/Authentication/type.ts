@@ -3,11 +3,14 @@ export type Login = {
     password: string
 }
 
-export type Register = Login & { confirmPassword: string, email?: string, shownName?: string}
+export type Register = {
+    accountId: string,
+    password: string,
+    confirmPassword: string,
+    email?: string,
+    username?: string}
 
 export type LoggedUser = {
-    id: string
-    shownName: string
+    user_id: string
     username: string
-    email: string
 }

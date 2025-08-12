@@ -1,15 +1,17 @@
 <script setup lang="ts">
   import { ref } from "vue";
+  import { signUp } from "./authentication.service.ts";
   import type { Register } from "./type";
 
   const emit = defineEmits<{ 'goto-login': [] }>()
   const signupError = ref<string|null>()
-  const signupForm = ref<Register>({ username: '', password: '', confirmPassword: '' })
+  const signupForm = ref<Register>({ accountId: '', password: '', confirmPassword: '' })
 
   function signup(event: SubmitEvent) {
     event.preventDefault()
     event.stopPropagation()
-    console.log(signupForm.value)
+
+    signUp(signupForm.value).then(() => emit('goto-login')).catch()
   }
 </script>
 
@@ -23,12 +25,12 @@
     >{{ signupError }}</div>
     <form class="flex flex-col w-full p-8 mb-16" v-on:submit="(event) => signup(event as SubmitEvent)">
       <label for="account">Account Id <b class="text-red-500">*</b></label>
-      <input type="text" id="account" v-model="signupForm.username" placeholder="Id that you will use to login" class="p-2 w-full h-10 border-solid border-2 rounded-lg mb-4" required>
+      <input type="text" id="account" v-model="signupForm.accountId" placeholder="Id that you will use to login" class="p-2 w-full h-10 border-solid border-2 rounded-lg mb-4" required>
       <label for="password">Password <b class="text-red-500">*</b></label>
       <input type="password" v-model="signupForm.password" id="password" placeholder="Type your password" class="p-2 w-full h-10 border-solid border-2 rounded-lg mb-1 " required>
       <input type="password" v-model="signupForm.confirmPassword" placeholder="Confirm your password" class="p-2 w-full h-10 border-solid border-2 rounded-lg mb-4" required>
       <label for="username">Username</label>
-      <input type="text" placeholder="Name you will known as" v-model="signupForm.shownName" id="username" class="p-2 w-full h-10 border-solid border-2 rounded-lg mb-4">
+      <input type="text" placeholder="Name you will known as" v-model="signupForm.username" id="username" class="p-2 w-full h-10 border-solid border-2 rounded-lg mb-4">
       <label for="email">Email</label>
       <input type="email" placeholder="Enter your email if you like" v-model="signupForm.email" id="email" class="p-2 w-full h-10 border-solid border-2 rounded-lg mb-4">
 

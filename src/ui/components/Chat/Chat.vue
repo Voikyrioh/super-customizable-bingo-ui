@@ -2,6 +2,7 @@
 import { ref, useTemplateRef } from "vue";
 import type { ChatMessage } from "./types.ts";
 import SendIcon from "../../icons/Send-Icon.vue";
+import { loggedUserStore } from "../../../store/logged-user.ts";
 
 const messages = ref<ChatMessage[]>([
   {
@@ -31,7 +32,7 @@ function sendMessage() {
   messages.value.push({
     type: 'MESSAGE',
     message,
-    username: 'Me',
+    username: loggedUserStore.username || 'Anonymous',
     at: new Date()
   })
   if ( messageInput.value ) messageInput.value.value = ''
